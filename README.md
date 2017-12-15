@@ -1,5 +1,4 @@
 # Chat App
----
 
 This is a chat app developed with Node.js during a [Udemy course](https://www.udemy.com/the-complete-nodejs-developer-course-2/learn/v4/).
 
@@ -11,7 +10,6 @@ After I completed the course, I developed some new features:
 There is a version running at [Heroku](https://chat-app-vst.herokuapp.com).
 
 ## Installation
----
 
 The app is designed to be installed locally (mac, linux or windows) or on Heroku.
 
