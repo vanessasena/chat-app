@@ -24,7 +24,11 @@ io.on('connection', (socket) => {
     if (!isRealString(params.name) || !isRealString(params.room)) {
       return callback('Name and room are required.')
     }
-
+    var repeatedUser = users.getUserList(params.room).filter(name => name.toLowerCase() === params.name.toLowerCase())
+    if (repeatedUser.length > 0) {
+      return callback('User already exist in this room.')
+    }
+    params.room = params.room.toLowerCase()
     socket.join(params.room)
     users.removeUser(socket.id)
     users.addUser(socket.id, params.name, params.room)
