@@ -44,7 +44,7 @@ socket.on('updateUserList', function(users) {
 });
 
 socket.on('newMessage', function (message) {
-  var formatedTime = moment(message.createdAt).format('h:m a');
+  var formatedTime = moment(message.createdAt).format('h:mm a');
   var template = jQuery('#message-template').html();
   var html = Mustache.render(template, {
     text: message.text,
@@ -62,7 +62,7 @@ socket.on('newMessage', function (message) {
 });
 
 socket.on('newLocationMessage', function (message) {
-  var formatedTime = moment(message.createdAt).format('h:m a');
+  var formatedTime = moment(message.createdAt).format('h:mm a');
 
   var template = jQuery('#location-message-template').html();
   var html = Mustache.render(template, {
@@ -86,7 +86,7 @@ jQuery('#message-form').on('submit', function(e) {
 
   var messageTextBox = jQuery('[name=message]');
 
-  socket.emit('createMessage', {    
+  socket.emit('createMessage', {
     text: messageTextBox.val()
   }, function () {
     messageTextBox.val('')
