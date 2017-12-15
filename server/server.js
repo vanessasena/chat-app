@@ -2,6 +2,7 @@ const path = require('path')
 const http = require('http')
 const express = require('express')
 const socketIO = require('socket.io')
+const hbs = require('hbs');
 
 const {generateMessage, generateLocationMessage} = require('./utils/message')
 const {isRealString} = require('./utils/validation')
@@ -13,9 +14,21 @@ const port = process.env.PORT || 3000
 var app = express()
 var server = http.createServer(app)
 var io = socketIO(server)
+
 var users = new Users()
 
 app.use(express.static(publicPath))
+app.set('view engine', 'hbs');
+app.set('views', publicPath);
+
+hbs.registerHelper('option', function(value, label) {
+    return new hbs.SafeString('<option value="' + value + '">' + label + "</option>");
+});
+
+app.get('/', (req, res) => {
+  var rooms = users.getRoomList();
+  res.render('index.hbs', {rooms})
+})
 
 io.on('connection', (socket) => {
   console.log('New user connected')
